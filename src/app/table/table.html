@@ -1,0 +1,22 @@
+<ng-crud-table 
+    mode="manual"
+    (editRecord)="edit($event)"
+    (removeRecord)="remove($event)"
+    [tableData]="data"
+    returnBtnIcon="account_circle"
+    returnBtnText="Return to Home"
+    returnBtnUrl="/"
+    editUrl="/form"
+    addBtnUrl="/form"
+    subtitle="A simple CRUD application example"
+    title="Arildo's CRUD"
+    [displayedColumns]="['character', 'production', 'director', 'company', 'year']"
+    [columns]="[
+        { db_name: 'character', title: 'Character' },
+        { db_name: 'production', title: 'Production' },
+        { db_name: 'director', title: 'Director' },
+        { db_name: 'company', title: 'Company' },
+        { db_name: 'year', title: 'Year' }
+    ]"
+>
+</ng-crud-table>

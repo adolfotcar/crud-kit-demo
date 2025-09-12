@@ -1,0 +1,30 @@
+<button (click)="updateTable()">Update Table</button>
+<ng-crud-aio 
+    mode="auto"
+    [tableData]="tableData"
+    [formData]="formData"
+    (editRecord)="edit($event)"
+    (saveRecord)="save($event)"
+    (removeRecord)="remove($event)"
+    returnBtnIcon="account_circle"
+    returnBtnText="Return to Home"
+    returnBtnUrl="/table"
+    subtitle="A simple CRUD application example"
+    title="Arildo's CRUD"
+    [fields]="[
+        { name: 'character', type: 'input', label: 'Character', placeholder: 'Enter character name', required: true },
+        { name: 'production', type: 'input', label: 'Production', placeholder: 'Enter production', required: true },
+        { name: 'director', type: 'input', label: 'Director', placeholder: 'Enter director', required: true },
+        { name: 'company', type: 'input', label: 'Company', placeholder: 'Enter company', required: true },
+        { name: 'year', type: 'number', label: 'Year', placeholder: 'Enter year', required: true }
+    ]"
+    [displayedColumns]="['character', 'production', 'director', 'company', 'year']"
+    [columns]="[
+        { db_name: 'character', title: 'Character' },
+        { db_name: 'production', title: 'Production' },
+        { db_name: 'director', title: 'Director' },
+        { db_name: 'company', title: 'Company' },
+        { db_name: 'year', title: 'Year' }
+    ]"
+>
+</ng-crud-aio>
