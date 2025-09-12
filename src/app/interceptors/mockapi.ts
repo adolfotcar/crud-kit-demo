@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
-import { NgCrudAioComponent } from 'ng-crud-kit';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatButtonModule } from '@angular/material/button';
+import { Component, inject, signal, ChangeDetectionStrategy, OnDestroy, effect } from '@angular/core';
+import { HttpClient, provideHttpClient, withInterceptors, HttpInterceptorFn, HttpResponse } from '@angular/common/http';
+import { of, delay, Subject, takeUntil } from 'rxjs';
+import { M } from '@angular/cdk/keycodes';
 
-@Component({
-  selector: 'app-aio',
-  standalone: true,
-  imports: [NgCrudAioComponent, MatTabsModule, MatButtonModule],
-  templateUrl: './aio.html',
-  styleUrl: './aio.scss'
-})
-export class Aio {
-  public tableData = [
+/**
+ * An HTTP interceptor function to mock API responses.
+ * It intercepts requests to a specific URL and returns a fake HttpResponse with sample data.
+ * For any other request, it lets the call proceed to the next handler.
+ */
+export const mockApiInterceptor: HttpInterceptorFn = (req, next) => {
+  let mockTableData = [
     {
       "id": "1",
       "name": "Wireless Ergonomic Mouse",
@@ -154,25 +152,106 @@ export class Aio {
     }  
   ];
 
-  public formData = {};
+  const apiUrl = "http://sampledomain.com"
+  const apiEndpoint = "items"
 
-  public edit(id: any) {
-    this.formData = {"id": 54,
-      "name": "Gaming Computer",
-      "description": "A gaming computer for fun",
-      "price": 2500,
+  function getItemId(url: string){
+    const lastSlashIndex = url.lastIndexOf('/');
+    if (lastSlashIndex !== -1) {
+      return url.substring(lastSlashIndex + 1);
+    }
+
+    return url;
+  }
+
+  function getItem(){
+    const id = getItemId(req.url);
+
+    return mockTableData.find(item => item.id === id)
+  }
+
+  // Intercepting all items and individual item requests
+  if (req.url.startsWith(apiUrl) && req.method === 'GET') {
+    if (req.url.endsWith(apiEndpoint)) {
+      const mockResponse = new HttpResponse({
+        status: 200,
+        body: {status: "success", data: mockTableData}
+      });
+      return of(mockResponse).pipe(delay(500));
+    } 
+    //intercepting single record from form
+    else if (req.url.startsWith(`${apiUrl}/single/${apiEndpoint}`) && req.method === 'GET') {
+      const mockResponse = new HttpResponse({
+        status: 200,
+        body: {status: "success", data: getItem()}
+      });
+      return of(mockResponse).pipe(delay(500));
+  } 
+  //if reaches here it's a single item request from the table
+  else {
+      const mockResponse = new HttpResponse({
+        status: 200,
+        body: {status: "success", data: getItem()}
+      });
+      return of(mockResponse).pipe(delay(500));
     }
   }
 
-  public remove(id: any){
-    alert(`Item ${id} is being removed!`)
+  //intercepts adding a new record from aio
+  if (req.url.startsWith(`${apiUrl}/${apiEndpoint}`) && req.method === 'POST') {
+    const mockResponse = new HttpResponse({
+        status: 200,
+        body: {status: "success", data: [...mockTableData, req.body]}
+      });
+      return of(mockResponse).pipe(delay(500));
   }
 
-  public save(data: any){
-    alert('Saving data!');
+  //intercepts adding a new record from form
+  if (req.url.startsWith(`${apiUrl}/single/${apiEndpoint}`) && req.method === 'POST') {
+    const mockResponse = new HttpResponse({
+        status: 200,
+        body: {status: "success", data: {id: '3'}}
+      });
+      return of(mockResponse).pipe(delay(500));
   }
 
-  public clearTable(){
-    this.tableData = [];
+  //intercepts updating a record
+  if (req.url.startsWith(`${apiUrl}/${apiEndpoint}`) && req.method === 'PUT') {
+    //removing existing item from the table
+    const id = getItemId(req.url);
+    const itemIndex = mockTableData.findIndex(item => item.id === id);
+    mockTableData.splice(itemIndex, 1);
+    //adding the received one
+    const mockResponse = new HttpResponse({
+        status: 200,
+        body: {status: "success", data: [...mockTableData, req.body]}
+      });
+      return of(mockResponse).pipe(delay(500));
   }
-}
+
+  //intercepts adding a new record from form
+  if (req.url.startsWith(`${apiUrl}/single/${apiEndpoint}`) && req.method === 'PUT') {
+    const mockResponse = new HttpResponse({
+        status: 200,
+        body: {status: "success", data: req.body}
+      });
+    return of(mockResponse).pipe(delay(500));
+  }
+
+  if (req.url.startsWith(`${apiUrl}/${apiEndpoint}`) && req.method === 'DELETE') {
+    //removing existing item from the table
+    const id = getItemId(req.url);
+    const itemIndex = mockTableData.findIndex(item => item.id === id);
+    mockTableData.splice(itemIndex, 1);
+    //adding the received one
+    const mockResponse = new HttpResponse({
+        status: 200,
+        body: {status: "success", data: [...mockTableData]}
+    });
+    return of(mockResponse).pipe(delay(500));
+  }
+
+
+
+  return next(req);
+};

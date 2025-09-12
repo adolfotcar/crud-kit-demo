@@ -1,391 +1,169 @@
 import { Component } from '@angular/core';
 import { NgCrudTableComponent } from 'ng-crud-kit';
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatButtonModule } from "@angular/material/button";
+
 
 @Component({
   selector: 'app-table',
-  imports: [NgCrudTableComponent],
+  imports: [NgCrudTableComponent, MatTabsModule, MatButtonModule],
   templateUrl: './table.html',
   styleUrl: './table.scss'
 })
 export class Table {
-  public data = [
-        {
-            "id": 2,
-            "character": "Dr Who",
-            "production": "Dr Who and the Daleks",
-            "director": "Roger Rabbit",
-            "company": "RTE Jr",
-            "year": 2022,
-            "created_at": "2023-03-05T20:30:28.000000Z",
-            "updated_at": "2023-03-05T20:30:28.000000Z"
-        },
-        {
-            "id": 3,
-            "character": "Nick Marson",
-            "production": "You Are Here",
-            "director": "Joshua Brown",
-            "company": "ITW Senior Musical Theatre",
-            "year": 2022,
-            "created_at": "2023-03-05T20:31:01.000000Z",
-            "updated_at": "2023-03-05T20:31:01.000000Z"
-        },
-        {
-            "id": 4,
-            "character": "Child Chorus",
-            "production": "Tosca",
-            "director": null,
-            "company": "Bord Gais Energy Theatre",
-            "year": 2022,
-            "created_at": "2023-03-06T12:10:11.000000Z",
-            "updated_at": "2023-03-06T12:10:11.000000Z"
-        },
-        {
-            "id": 5,
-            "character": "Altar boy\/ Puppet",
-            "production": "The Sound of Music",
-            "director": "Tony Finnegan",
-            "company": "National Concert Hall",
-            "year": 2022,
-            "created_at": "2023-03-06T12:11:14.000000Z",
-            "updated_at": "2023-03-06T12:11:14.000000Z"
-        },
-        {
-            "id": 10,
-            "character": "Fashion Model",
-            "production": "Winter and Summer clothing line shoots for retail website, social media campaigns, store boards",
-            "director": null,
-            "company": "Trotters Childrenswear Ltd",
-            "year": 2019,
-            "created_at": "2023-03-06T18:34:13.000000Z",
-            "updated_at": "2023-03-06T18:34:13.000000Z"
-        },
-        {
-            "id": 11,
-            "character": "Ruth Brennan",
-            "production": "Fair city",
-            "director": null,
-            "company": "RTE",
-            "year": 2011,
-            "created_at": "2023-03-13T20:21:03.000000Z",
-            "updated_at": "2023-03-13T20:21:03.000000Z"
-        },
-        {
-            "id": 12,
-            "character": "Little boy on street",
-            "production": "AlB Christmas Ad",
-            "director": "Dylan Davies",
-            "company": null,
-            "year": 2014,
-            "created_at": "2023-03-14T19:26:24.000000Z",
-            "updated_at": "2023-03-14T19:26:24.000000Z"
-        },
-        {
-            "id": 13,
-            "character": "Child model",
-            "production": "Barnardos\/Aldi photoshoot",
-            "director": null,
-            "company": null,
-            "year": 2022,
-            "created_at": "2023-03-14T19:52:27.000000Z",
-            "updated_at": "2023-03-14T19:52:27.000000Z"
-        },
-        {
-            "id": 14,
-            "character": "Daughter",
-            "production": "Amazon Holiday Commercial",
-            "director": "Zak Emerson",
-            "company": "Butter Productions",
-            "year": 2022,
-            "created_at": "2023-03-14T19:53:12.000000Z",
-            "updated_at": "2023-03-14T19:53:12.000000Z"
-        },
-        {
-            "id": 15,
-            "character": "Giggling Girl",
-            "production": "The Doll Factory",
-            "director": null,
-            "company": "Movie Extras.ie",
-            "year": 2023,
-            "created_at": "2023-03-15T13:37:59.000000Z",
-            "updated_at": "2023-03-15T13:37:59.000000Z"
-        },
-        {
-            "id": 16,
-            "character": "Villager girl",
-            "production": "Epic",
-            "director": null,
-            "company": "Movie Extras.ie \/ Disney\/ABC",
-            "year": 2021,
-            "created_at": "2023-03-15T13:39:36.000000Z",
-            "updated_at": "2023-03-15T13:39:36.000000Z"
-        },
-        {
-            "id": 17,
-            "character": "Extras\/Stand-in",
-            "production": "Moonhaven",
-            "director": null,
-            "company": "Movie Extras.ie",
-            "year": 2021,
-            "created_at": "2023-03-15T13:41:27.000000Z",
-            "updated_at": "2023-03-15T13:41:27.000000Z"
-        },
-        {
-            "id": 18,
-            "character": "Miss Miller",
-            "production": "Goodnight Mr Tom",
-            "director": "Liam Corrigan",
-            "company": "Mill Theatre Dublin",
-            "year": 2022,
-            "created_at": "2023-03-15T16:54:55.000000Z",
-            "updated_at": "2023-03-15T16:54:55.000000Z"
-        },
-        {
-            "id": 19,
-            "character": "Nurse",
-            "production": "Goodnight Mr Tom",
-            "director": "Liam Corrigan",
-            "company": "Mill Theatre Dundrum",
-            "year": 2022,
-            "created_at": "2023-03-15T16:56:07.000000Z",
-            "updated_at": "2023-03-15T16:56:07.000000Z"
-        },
-        {
-            "id": 20,
-            "character": "Peter Rabbit",
-            "production": "Peter Rabbit",
-            "director": "Ms. Mc Coy",
-            "company": "MS. Mc Coy drama club",
-            "year": 2018,
-            "created_at": "2023-03-15T16:58:01.000000Z",
-            "updated_at": "2023-03-15T16:58:01.000000Z"
-        },
-        {
-            "id": 21,
-            "character": "Ensemble",
-            "production": "Ali in wonderland",
-            "director": "Miss Ali Stage School",
-            "company": "Olympia Theatre",
-            "year": 2018,
-            "created_at": "2023-03-15T17:00:52.000000Z",
-            "updated_at": "2023-03-15T17:00:52.000000Z"
-        },
-        {
-            "id": 22,
-            "character": "Speaking role as Sparkles",
-            "production": "Apps of Life",
-            "director": "Miss Ali",
-            "company": "Olympia Theatre",
-            "year": 2017,
-            "created_at": "2023-03-15T17:20:38.000000Z",
-            "updated_at": "2023-03-15T17:20:38.000000Z"
-        },
-        {
-            "id": 28,
-            "character": "Georgie",
-            "production": "Goodnight Mr Tom",
-            "director": "Liam Corrigan",
-            "company": "Glencullen Dundrum MDS",
-            "year": 2022,
-            "created_at": "2023-03-15T21:15:05.000000Z",
-            "updated_at": "2023-03-15T21:15:05.000000Z"
-        },
-        {
-            "id": 29,
-            "character": "N\/A",
-            "production": null,
-            "director": null,
-            "company": null,
-            "year": null,
-            "created_at": "2023-03-15T22:39:19.000000Z",
-            "updated_at": "2023-03-15T22:39:19.000000Z"
-        },
-        {
-            "id": 30,
-            "character": "Child Chorus",
-            "production": "Tosca",
-            "director": "Micheal Gieleta",
-            "company": "INO production in the Bord Gais Energy Theatre",
-            "year": 2022,
-            "created_at": "2023-03-16T18:13:09.000000Z",
-            "updated_at": "2023-03-16T18:13:09.000000Z"
-        },
-        {
-            "id": 31,
-            "character": "Carrie",
-            "production": "Goodnight Mister Tom",
-            "director": "Liam Corrigan",
-            "company": "Glencullen Dundrum MDS production in the Mill Theatre, Dundrum",
-            "year": 2022,
-            "created_at": "2023-03-16T18:15:07.000000Z",
-            "updated_at": "2023-03-16T18:15:07.000000Z"
-        },
-        {
-            "id": 32,
-            "character": "Elsa",
-            "production": "Into the Unknown",
-            "director": "Bernie Delaney",
-            "company": "Bernie Delaney School of Speech & Drama",
-            "year": 2023,
-            "created_at": "2023-03-16T19:14:15.000000Z",
-            "updated_at": "2023-03-16T19:14:15.000000Z"
-        },
-        {
-            "id": 33,
-            "character": "Group Dance & Singing",
-            "production": "Rise Up",
-            "director": "Claire Tighe",
-            "company": "Theatreworx",
-            "year": 2022,
-            "created_at": "2023-03-16T19:18:13.000000Z",
-            "updated_at": "2023-03-16T19:18:13.000000Z"
-        },
-        {
-            "id": 34,
-            "character": "Chorus",
-            "production": "Tosca",
-            "director": "INO",
-            "company": "Bord Gais Theatre",
-            "year": 2022,
-            "created_at": "2023-03-17T19:09:48.000000Z",
-            "updated_at": "2023-03-17T19:09:48.000000Z"
-        },
-        {
-            "id": 35,
-            "character": "Featured Role",
-            "production": "Climate Change Ad",
-            "director": null,
-            "company": "RTE",
-            "year": 2019,
-            "created_at": "2023-03-17T19:10:59.000000Z",
-            "updated_at": "2023-03-17T19:10:59.000000Z"
-        },
-        {
-            "id": 39,
-            "character": "Choir",
-            "production": "Hole In The Ground",
-            "director": null,
-            "company": "Feature Film",
-            "year": 2017,
-            "created_at": "2023-03-18T11:43:31.000000Z",
-            "updated_at": "2023-03-18T11:43:31.000000Z"
-        },
-        {
-            "id": 40,
-            "character": "Audience participation\/dancing",
-            "production": "RTE Swipe",
-            "director": null,
-            "company": "RTE",
-            "year": 2016,
-            "created_at": "2023-03-18T11:44:26.000000Z",
-            "updated_at": "2023-03-18T11:44:26.000000Z"
-        },
-        {
-            "id": 41,
-            "character": "Tazia",
-            "production": "Survivor - U.S. Mini TV Series",
-            "director": null,
-            "company": null,
-            "year": 2016,
-            "created_at": "2023-03-18T11:45:00.000000Z",
-            "updated_at": "2023-03-18T11:45:00.000000Z"
-        },
-        {
-            "id": 42,
-            "character": "Dancing at carnival party",
-            "production": "RTE Elev8",
-            "director": null,
-            "company": "RTE",
-            "year": 2014,
-            "created_at": "2023-03-18T11:46:20.000000Z",
-            "updated_at": "2023-03-18T11:46:20.000000Z"
-        },
-        {
-            "id": 43,
-            "character": "Singer",
-            "production": "Revival - Scorched Earth Trilogy",
-            "director": "John McIlduff",
-            "company": "Irish National Opera & Dumb World",
-            "year": 2022,
-            "created_at": "2023-03-18T11:51:23.000000Z",
-            "updated_at": "2023-03-18T11:51:23.000000Z"
-        },
-        {
-            "id": 44,
-            "character": "Children Choir",
-            "production": "La Boheme",
-            "director": "Fergus Shiel",
-            "company": "Irish National Opera",
-            "year": 2021,
-            "created_at": "2023-03-18T11:56:06.000000Z",
-            "updated_at": "2023-03-18T11:56:06.000000Z"
-        },
-        {
-            "id": 45,
-            "character": "Child chorus",
-            "production": "Carmen",
-            "director": "Paul Curran",
-            "company": "Irish National Opera",
-            "year": 2022,
-            "created_at": "2023-03-19T12:03:59.000000Z",
-            "updated_at": "2023-03-19T12:03:59.000000Z"
-        },
-        {
-            "id": 46,
-            "character": "Young Cenerentola",
-            "production": "Cenerentola",
-            "director": "Orpha Phelan",
-            "company": "Irish National Opera",
-            "year": 2019,
-            "created_at": "2023-03-19T12:05:44.000000Z",
-            "updated_at": "2023-03-19T12:05:44.000000Z"
-        },
-        {
-            "id": 47,
-            "character": "Child extra",
-            "production": "Hole in the ground",
-            "director": "Lee Cronin",
-            "company": null,
-            "year": 2017,
-            "created_at": "2023-03-20T13:50:23.000000Z",
-            "updated_at": "2023-03-20T13:50:23.000000Z"
-        },
-        {
-            "id": 48,
-            "character": "Child extra",
-            "production": "RTE Jnr promo",
-            "director": null,
-            "company": "RTE",
-            "year": 2017,
-            "created_at": "2023-03-20T13:51:29.000000Z",
-            "updated_at": "2023-03-20T13:51:29.000000Z"
-        },
-        {
-            "id": 49,
-            "character": "Janet",
-            "production": "Janet short film",
-            "director": "Olivia McLaughlin",
-            "company": null,
-            "year": 2019,
-            "created_at": "2023-03-20T13:54:47.000000Z",
-            "updated_at": "2023-03-20T13:54:47.000000Z"
-        },
-        {
-            "id": 52,
-            "character": "Part of 8 child choir",
-            "production": "The First Child",
-            "director": "Enda Walsh",
-            "company": "Irish National Opera and Landmark Productions (toured around Ireland)",
-            "year": 2022,
-            "created_at": "2023-03-20T15:57:49.000000Z",
-            "updated_at": "2023-03-20T15:57:49.000000Z"
-        }];
+  public tableData = [
+    {
+      "id": "1",
+      "name": "Wireless Ergonomic Mouse",
+      "description": "A comfortable and responsive mouse designed for long hours of work.",
+      "price": 49.99,
+      "created_at": 1678886400
+    },
+    {
+      "id": "2",
+      "name": "4K Ultra HD Monitor",
+      "description": "Crisp and vibrant display with a 27-inch screen, perfect for creative work.",
+      "price": 349.50,
+      "created_at": 1678972800
+    },
+    {
+      "id": "3",
+      "name": "Bluetooth Noise-Cancelling Headphones",
+      "description": "Immersive sound and active noise cancellation for a superior listening experience.",
+      "price": 199.00,
+      "created_at": 1679059200
+    },
+    {
+      "id": "4",
+      "name": "Portable SSD 1TB",
+      "description": "High-speed solid-state drive for quick data transfer and backup.",
+      "price": 125.75,
+      "created_at": 1679145600
+    },
+    {
+      "id": "5",
+      "name": "Smart Coffee Maker",
+      "description": "Brew your coffee from anywhere using your smartphone and the companion app.",
+      "price": 75.25,
+      "created_at": 1679232000
+    },
+    {
+      "id": "6",
+      "name": "LED Desk Lamp with Wireless Charger",
+      "description": "A modern desk lamp with multiple brightness settings and a built-in wireless charger.",
+      "price": 55.00,
+      "created_at": 1679318400
+    },
+    {
+      "id": "7",
+      "name": "Mechanical Gaming Keyboard",
+      "description": "Tactile and responsive keyboard with customizable RGB lighting for gamers.",
+      "price": 89.99,
+      "created_at": 1679404800
+    },
+    {
+      "id": "8",
+      "name": "Fitness Tracker Smartwatch",
+      "description": "Monitors heart rate, steps, and sleep, and connects to your phone for notifications.",
+      "price": 149.50,
+      "created_at": 1679491200
+    },
+    {
+      "id": "9",
+      "name": "Robot Vacuum Cleaner",
+      "description": "Automated vacuum with smart mapping and a powerful suction for effortless cleaning.",
+      "price": 299.99,
+      "created_at": 1679577600
+    },
+    {
+      "id": "10",
+      "name": "Compact Digital Camera",
+      "description": "Capture high-quality photos and videos with this easy-to-use digital camera.",
+      "price": 249.00,
+      "created_at": 1679664000
+    },
+    {
+      "id": "11",
+      "name": "Stainless Steel Water Bottle",
+      "description": "Keeps drinks cold for 24 hours and hot for 12, with a leak-proof lid.",
+      "price": 22.50,
+      "created_at": 1679750400
+    },
+    {
+      "id": "12",
+      "name": "Smart Home Speaker",
+      "description": "Voice-activated speaker with high-fidelity audio and smart home control features.",
+      "price": 99.99,
+      "created_at": 1679836800
+    },
+    {
+      "id": "13",
+      "name": "Portable Blender",
+      "description": "Blend smoothies on the go with this compact and powerful portable blender.",
+      "price": 35.00,
+      "created_at": 1679923200
+    },
+    {
+      "id": "14",
+      "name": "Wireless Charging Pad",
+      "description": "Charge your compatible devices wirelessly with a sleek and simple charging pad.",
+      "price": 19.99,
+      "created_at": 1680009600
+    },
+    {
+      "id": "15",
+      "name": "Laptop Stand",
+      "description": "Elevate your laptop for a more ergonomic viewing angle and better airflow.",
+      "price": 28.75,
+      "created_at": 1680096000
+    },
+    {
+      "id": "16",
+      "name": "Outdoor Security Camera",
+      "description": "Weatherproof camera with motion detection and night vision for home security.",
+      "price": 159.00,
+      "created_at": 1680182400
+    },
+    {
+      "id": "17",
+      "name": "Electric Toothbrush",
+      "description": "Sonic vibration technology for a deep and thorough clean.",
+      "price": 65.50,
+      "created_at": 1680268800
+    },
+    {
+      "id": "18",
+      "name": "Aromatherapy Diffuser",
+      "description": "Adds a calming scent and moisture to the air with a built-in light.",
+      "price": 45.00,
+      "created_at": 1680355200
+    },
+    {
+      "id": "19",
+      "name": "Smart Light Bulb",
+      "description": "Control the color and brightness of your lights from your phone.",
+      "price": 15.99,
+      "created_at": 1680441600
+    },
+    {
+      "id": "20",
+      "name": "Portable Projector",
+      "description": "A compact projector for movie nights anywhere, with a built-in battery.",
+      "price": 399.00,
+      "created_at": 1680528000
+    }  
+  ];
 
   public edit(id: any) {
-    console.log(id);
+    alert(`Item ${id} is being edited!`)
   }
 
   public remove(id: any){
-    console.log(id);
+    alert(`Item ${id} is being removed!`)
+  }
+
+  public clearTable(){
+    this.tableData = [];
   }
 
 }

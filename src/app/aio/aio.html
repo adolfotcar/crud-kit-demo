@@ -1,30 +1,54 @@
-<button (click)="updateTable()">Update Table</button>
-<ng-crud-aio 
-    mode="auto"
-    [tableData]="tableData"
-    [formData]="formData"
-    (editRecord)="edit($event)"
-    (saveRecord)="save($event)"
-    (removeRecord)="remove($event)"
-    returnBtnIcon="account_circle"
-    returnBtnText="Return to Home"
-    returnBtnUrl="/table"
-    subtitle="A simple CRUD application example"
-    title="Arildo's CRUD"
-    [fields]="[
-        { name: 'character', type: 'input', label: 'Character', placeholder: 'Enter character name', required: true },
-        { name: 'production', type: 'input', label: 'Production', placeholder: 'Enter production', required: true },
-        { name: 'director', type: 'input', label: 'Director', placeholder: 'Enter director', required: true },
-        { name: 'company', type: 'input', label: 'Company', placeholder: 'Enter company', required: true },
-        { name: 'year', type: 'number', label: 'Year', placeholder: 'Enter year', required: true }
-    ]"
-    [displayedColumns]="['character', 'production', 'director', 'company', 'year']"
-    [columns]="[
-        { db_name: 'character', title: 'Character' },
-        { db_name: 'production', title: 'Production' },
-        { db_name: 'director', title: 'Director' },
-        { db_name: 'company', title: 'Company' },
-        { db_name: 'year', title: 'Year' }
-    ]"
->
-</ng-crud-aio>
+
+<mat-tab-group>
+  <mat-tab label="Automatic">
+    <ng-crud-aio 
+        returnBtnIcon="table"
+        returnBtnText="Go to table"
+        returnBtnUrl="/table"
+        title="Items Automatic CRUD"
+        subtitle="A simple CRUD application example, automatically handling HTTP Requests"
+        apiUrl="http://sampledomain.com"
+        apiEndpoint="items"
+        [fields]="[
+            { name: 'name', type: 'input', label: 'Name', placeholder: 'Enter item name', required: true },
+            { name: 'description', type: 'text', label: 'Descirption', placeholder: 'Enter description', required: true },
+            { name: 'price', type: 'input', label: 'Price', placeholder: 'Enter price', required: true },
+        ]"
+        [displayedColumns]="['name', 'description', 'price']"
+        [columns]="[
+            { db_name: 'name', title: 'Name' },
+            { db_name: 'description', title: 'Description' },
+            { db_name: 'price', title: 'Price' }
+        ]"
+    />
+  </mat-tab>
+  <mat-tab label="Manual">
+    <div>
+        <button matButton="tonal" (click)="clearTable()">Clear Table</button>
+    </div>
+    <ng-crud-aio 
+        mode="manual"
+        returnBtnIcon="table"
+        returnBtnText="Go to table"
+        returnBtnUrl="/table"
+        title="Items Manual CRUD"
+        subtitle="A simple CRUD application example, emitting events for the consumer handle HTTP Requests"
+        [tableData]="tableData"
+        [formData]="formData"
+        [displayedColumns]="['name', 'description', 'price']"
+        [fields]="[
+            { name: 'name', type: 'input', label: 'Name', placeholder: 'Enter item name', required: true },
+            { name: 'description', type: 'text', label: 'Descirption', placeholder: 'Enter description', required: true },
+            { name: 'price', type: 'input', label: 'Price', placeholder: 'Enter price', required: true },
+        ]"
+        [columns]="[
+            { db_name: 'name', title: 'Name' },
+            { db_name: 'description', title: 'Description' },
+            { db_name: 'price', title: 'Price' }
+        ]"
+        (editRecord)="edit($event)"
+        (saveRecord)="save($event)"
+        (removeRecord)="remove($event)"
+    />
+  </mat-tab>
+</mat-tab-group>

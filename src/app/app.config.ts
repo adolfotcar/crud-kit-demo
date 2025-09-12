@@ -4,14 +4,14 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { authInterceptor } from './interceptors/auth';
+import { mockApiInterceptor } from './interceptors/mockapi'
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([mockApiInterceptor])),
     importProvidersFrom(ReactiveFormsModule),
   ]
 };

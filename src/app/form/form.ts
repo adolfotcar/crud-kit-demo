@@ -1,35 +1,31 @@
 import { Component } from '@angular/core';
 import { NgCrudFormComponent } from 'ng-crud-kit';
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: 'app-form',
-  imports: [NgCrudFormComponent],
+  imports: [NgCrudFormComponent, MatTabsModule, MatButtonModule],
   templateUrl: './form.html',
   styleUrl: './form.scss'
 })
 export class Form {
-  public data = {
-      "id": 54,
-      "character": "Young Tisbe, Red riding hood",
-      "production": "La Cenerentola",
-      "director": "Orpha Phelan",
-      "company": "Irish National Opera in The Bord gais",
-      "year": 2019
+  public data = {"id": 54,
+      "name": "Gaming Computer",
+      "description": "A gaming computer for fun",
+      "price": 2500,
     };
 
   public saved(formRawData: any){
-    console.log(formRawData);
+    alert('Item being saved!');
   }
 
   public updateForm(){
-    this.data = {
-      "id": 54,
-      "character": "Arildo",
-      "production": "Joseph",
-      "director": "Antonio",
-      "company": "Fagundes",
-      "year": 2019
-    }
+    this.data = {"id": 87,
+      "name": "Family Car",
+      "description": "A car for family trips",
+      "price": 76890,
+    };
   }
 
 }

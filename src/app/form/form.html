@@ -1,21 +1,42 @@
-<button (click)="updateForm()">Refresh</button>
-<ng-crud-form 
-    (recordSaved)="saved($event)"
-    mode="manual"
-    returnBtnIcon="clear"
-    returnBtnText="Cancel and Return"
-    returnBtnUrl="/table"
-    subtitle="A simple CRUD application example"
-    title="Arildo's CRUD"
-    redirectOnSaveUrl="/form"
-    redirectOnSaveIdField="id"
-    [formData]="data"
-    [fields]="[
-        { name: 'character', type: 'input', label: 'Character', placeholder: 'Enter character name', required: true },
-        { name: 'production', type: 'input', label: 'Production', placeholder: 'Enter production', required: true },
-        { name: 'director', type: 'input', label: 'Director', placeholder: 'Enter director', required: true },
-        { name: 'company', type: 'input', label: 'Company', placeholder: 'Enter company', required: true },
-        { name: 'year', type: 'number', label: 'Year', placeholder: 'Enter year', required: true }
-    ]"
->
-</ng-crud-form>
+<mat-tab-group>
+    <mat-tab label="Automatic">
+        <ng-crud-form             
+            returnBtnIcon="clear"
+            returnBtnText="Cancel and Return"
+            returnBtnUrl="/table"
+            title="Items Manual Form"
+            subtitle="A table to display all items, emitting events for the consumer handle HTTP Requests"            
+            redirectOnSaveUrl="/form"
+            redirectOnSaveIdField="id"
+            apiUrl="http://sampledomain.com"
+            apiEndpoint="single/items"
+            [fields]="[
+                { name: 'name', type: 'input', label: 'Name', placeholder: 'Enter item name', required: true },
+                { name: 'description', type: 'text', label: 'Descirption', placeholder: 'Enter description', required: true },
+                { name: 'price', type: 'input', label: 'Price', placeholder: 'Enter price', required: true },
+            ]"
+        />
+    </mat-tab>
+    <mat-tab label="Manual">
+        <div>
+            <button matButton="tonal" (click)="updateForm()">Change Values</button>
+        </div>
+        <ng-crud-form             
+            mode="manual"
+            returnBtnIcon="clear"
+            returnBtnText="Cancel and Return"
+            returnBtnUrl="/table"
+            title="Items Manual Form"
+            subtitle="A table to display all items, emitting events for the consumer handle HTTP Requests"            
+            redirectOnSaveUrl="/form"
+            redirectOnSaveIdField="id"
+            [formData]="data"
+            [fields]="[
+                { name: 'name', type: 'input', label: 'Name', placeholder: 'Enter item name', required: true },
+                { name: 'description', type: 'text', label: 'Descirption', placeholder: 'Enter description', required: true },
+                { name: 'price', type: 'input', label: 'Price', placeholder: 'Enter price', required: true },
+            ]"
+            (recordSaved)="saved($event)"
+        />
+    </mat-tab>
+</mat-tab-group>
