@@ -14,6 +14,8 @@
                 { name: 'name', type: 'input', label: 'Name', placeholder: 'Enter item name', required: true },
                 { name: 'description', type: 'text', label: 'Descirption', placeholder: 'Enter description', required: true },
                 { name: 'price', type: 'input', label: 'Price', placeholder: 'Enter price', required: true },
+                { name: 'type', type: 'select', label: 'Type', 'options': [{ value: 'vehicle', label: 'Vehicle'}, {value: 'electronics', label: 'Electronics'}, {value: 'other', label: 'Other'}], required: false },
+                { name: 'terms', type: 'checkbox', label: 'I agree with T&C', required: false}
             ]"
         />
     </mat-tab>
@@ -35,6 +37,8 @@
                 { name: 'name', type: 'input', label: 'Name', placeholder: 'Enter item name', required: true },
                 { name: 'description', type: 'text', label: 'Descirption', placeholder: 'Enter description', required: true },
                 { name: 'price', type: 'input', label: 'Price', placeholder: 'Enter price', required: true },
+                { name: 'type', type: 'select', label: 'Type', 'options': [{ value: 'vehicle', label: 'Vehicle'}, {value: 'electronics', label: 'Electronics'}, {value: 'other', label: 'Other'}], required: false },
+                { name: 'terms', type: 'checkbox', label: 'I agree with T&C', required: false}
             ]"
             (recordSaved)="saved($event)"
         />
