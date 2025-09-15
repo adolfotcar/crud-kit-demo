@@ -156,12 +156,15 @@ export class Aio {
 
   public formData = {};
 
+  public editId: any = null;
+
   public edit(id: any) {
     this.formData = {"id": 54,
       "name": "Gaming Computer",
       "description": "A gaming computer for fun",
       "price": 2500,
     }
+    this.editId = id;
   }
 
   public remove(id: any){
@@ -169,10 +172,27 @@ export class Aio {
   }
 
   public save(data: any){
-    alert('Saving data!');
+    if (this.editId)
+	alert('Updating data');
+    else
+    	alert('Saving data!');
+  }
+
+  public cancelEdit(){
+	this.editId = null
   }
 
   public clearTable(){
     this.tableData = [];
+  }
+
+  public updateForm(){
+	this.formData ={
+      "id": "16",
+      "name": "Outdoor Security Camera",
+      "description": "Weatherproof camera with motion detection and night vision for home",
+      "price": 159.00,
+      "created_at": 1680182400
+    };
   }
 }

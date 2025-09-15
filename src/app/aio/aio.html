@@ -24,6 +24,9 @@
   </mat-tab>
   <mat-tab label="Manual">
     <div>
+        <button matButton="filled" (click)="updateForm()">Change Form</button>
+    </div>
+    <div>
         <button matButton="tonal" (click)="clearTable()">Clear Table</button>
     </div>
     <ng-crud-aio 
@@ -49,6 +52,7 @@
         (editRecord)="edit($event)"
         (saveRecord)="save($event)"
         (removeRecord)="remove($event)"
+        (cancelEditing)="cancelEdit()"
     />
   </mat-tab>
 </mat-tab-group>
